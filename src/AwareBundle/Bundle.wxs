@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix
+  xmlns="http://schemas.microsoft.com/wix/2006/wi"
+  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+  xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+
+	<?define NetFx45MinRelease = 378389?>
+	<?define NetFx45WebLink = http://go.microsoft.com/fwlink/?LinkId=225704 ?>
+	<?define NetFx45RedistLink = http://go.microsoft.com/fwlink/?LinkId=225702 ?>
+	<?define NetFx45EulaLink =  http://go.microsoft.com/fwlink/?LinkID=260867 ?>
+
+	<?include ..\Version.wxi ?>
+
+
+
+	<Bundle 
+		Name="Aware $(var.AwareVersion)" 
+		Version="$(var.AwareVersion)" 
+		Manufacturer="Buckling Springs LLC." 
+		UpgradeCode="10b6f3f9-dade-42c7-87f1-0ee9b504d9a1" 
+		IconSourceFile="Aware.ico"
+		ParentName="Aware $(var.AwareVersion)"
+		HelpTelephone="(650) 308-4717"
+		HelpUrl="http://www.aware.am"
+		AboutUrl="http://www.aware.am">
+		
+		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+			<bal:WixStandardBootstrapperApplication
+				LicenseFile="Aware.rtf"
+				LogoFile="Aware.ico"
+			/>
+		</BootstrapperApplicationRef>
+		<Chain>
+			<PackageGroupRef Id="NetFx45Web"/>
+			<MsiPackage
+			  Id="x86LocalDb"
+			  InstallCondition='NOT VersionNT64'
+			  SourceFile="x86\SqlLocaLDB.msi">
+				<MsiProperty Name="IACCEPTSQLLOCALDBLICENSETERMS" Value="YES" />
+			</MsiPackage>
+			<MsiPackage
+			  Id="x64LocalDb"
+			  InstallCondition='VersionNT64'
+			  SourceFile="x64\SqlLocaLDB.msi">
+				<MsiProperty Name="IACCEPTSQLLOCALDBLICENSETERMS" Value="YES" />
+			</MsiPackage>
+			<MsiPackage Id="AwareMsi" SourceFile="$(var.AwareSetup.TargetPath)" />
+		</Chain>
+	</Bundle>
+
+	<Fragment>
+		<util:RegistrySearch
+			Id="NETFRAMEWORK45"
+			Variable="NETFRAMEWORK45"
+			Root="HKLM"
+			Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
+			Value="Release"
+			Result="value" />
+	</Fragment>
+
+
+	<Fragment>
+		<util:RegistrySearchRef Id="NETFRAMEWORK45"/>
+
+		<WixVariable Id="WixMbaPrereqPackageId" Value="NetFx45Web" />
+		<WixVariable Id="WixMbaPrereqLicenseUrl" Value="$(var.NetFx45EulaLink)" />
+
+		<PackageGroup Id="NetFx45Web">
+			<ExePackage
+				InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullWebLog].html"
+				RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullWebLog].html"
+				UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullWebLog].html"
+				PerMachine="yes"
+				DetectCondition="NETFRAMEWORK45 &gt;= $(var.NetFx45MinRelease)"
+				Id="NetFx45Web"
+				Vital="yes"
+				Permanent="yes"
+				Protocol="netfx4"
+				DownloadUrl="$(var.NetFx45WebLink)"
+				LogPathVariable="NetFx45FullWebLog"
+				Compressed="no"
+				Name="redist\dotNetFx45_Full_setup.exe"
+				SuppressSignatureVerification="yes">
+
+				<RemotePayload
+					CertificatePublicKey="BE931A1B869E4BB989C2B32D0C105204ECBEFB3D"
+					CertificateThumbprint="8363887511B4835B79C383ECF06FC055B5839255"
+					Description="Microsoft .NET Framework 4.5 Setup"
+					Hash="F6BA6F03C65C3996A258F58324A917463B2D6FF4"
+					ProductName="Microsoft .NET Framework 4.5"
+					Size="1005568"
+					Version="4.5.50709.17929" />
+			</ExePackage>
+		</PackageGroup>
+	</Fragment>
+
+
+
+	<Fragment>
+		<util:RegistrySearchRef Id="NETFRAMEWORK45"/>
+
+		<WixVariable Id="WixMbaPrereqPackageId" Value="NetFx45Redist" />
+		<WixVariable Id="WixMbaPrereqLicenseUrl" Value="$(var.NetFx45EulaLink)" />
+
+		<PackageGroup Id="NetFx45Redist">
+			<ExePackage
+				InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullLog].html"
+				RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullLog].html"
+				UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log [NetFx45FullLog].html"
+				PerMachine="yes"
+				DetectCondition="NETFRAMEWORK45 &gt;= $(var.NetFx45MinRelease)"
+				Id="NetFx45Redist"
+				Vital="yes"
+				Permanent="yes"
+				Protocol="netfx4"
+				DownloadUrl="$(var.NetFx45RedistLink)"
+				LogPathVariable="NetFx45FullLog"
+				Compressed="no"
+				Name="redist\dotNetFx45_Full_x86_x64.exe">
+				<RemotePayload
+					Size="50349920"
+					Version="4.5.50709.17929"
+					ProductName="Microsoft .NET Framework 4.5"
+					Description="Microsoft .NET Framework 4.5 Setup"
+					CertificatePublicKey="D37F6D0F2894D56049061A44596FFA88CBFD1B5B"
+					CertificateThumbprint="19F8F76F4655074509769C20349FFAECCECD217D"
+					Hash="CD57380514DC157DF75A09D3E54C96D1DF3DF51A"/>
+			</ExePackage>
+		</PackageGroup>
+	</Fragment>
+
+	<!-- set to Release number of the .NET Framework 4.5 if installed (not set otherwise) -->
+	<Fragment>
+		<Property Id="NETFRAMEWORK45" Secure="yes">
+			<RegistrySearch Id="NetFramework45" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Release" Type="raw" />
+		</Property>
+	</Fragment>
+
+	
+
+
+</Wix>

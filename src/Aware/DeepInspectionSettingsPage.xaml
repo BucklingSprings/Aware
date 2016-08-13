@@ -1,0 +1,75 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:settings="clr-namespace:BucklingSprings.Aware.Settings;assembly=BucklingSprings.Aware"
+	xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+	mc:Ignorable="d"
+	FontSize="24"
+	Background="#ededed"
+	Foreground="#818181"
+	d:DesignHeight="750"
+	d:DesignWidth="1000">
+
+	<UserControl.Resources>
+		<data:StringToUpperCaseConverter x:Key="StringToUpperCaseConverter" />		
+	</UserControl.Resources>
+	<Grid  Margin="50,0,50,0">
+		<Grid.Resources>
+			<Style TargetType="TextBlock">
+				<Setter Property="Margin" Value="8,-8,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+			<Style TargetType="Label">
+				<Setter Property="Margin" Value="8,0,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+			<Style TargetType="TextBox">
+				<Setter Property="Margin" Value="8,0,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+		</Grid.Resources>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Margin="31,26,0,20">
+				 <Run x:Name="Run" 
+					Text="{Binding MainTitle, Mode=OneWay, Converter={StaticResource StringToUpperCaseConverter}}" 
+					FontSize="24" Foreground="#818181" FontWeight="Black"
+					FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black"></Run>
+		</TextBlock>
+
+		<CheckBox Grid.Row="1" IsChecked="{Binding DeepInspectionEnabled}"><TextBlock>Collect Replay data</TextBlock></CheckBox>
+		<CheckBox Grid.Row="2" IsChecked="{Binding CollectScreenImages}" Visibility="{Binding DeepInspectionDetailsVisibility}"><TextBlock>Collect Screen Images</TextBlock></CheckBox>
+
+		<Grid Grid.Row="3" Visibility="{Binding DeepInspectionDetailsVisibility}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			
+			
+			<Label Grid.Row="0">Save data to:</Label>
+			<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ArchiveLocation}" ></TextBox>
+
+			<Label Grid.Row="1">Stop collecting data when disk space falls below:</Label>
+			<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding MinSpaceInGb, FallbackValue=1}" TextAlignment="Right" ></TextBox>
+			<Label Grid.Row="1" Grid.Column="2" >GB</Label>
+		</Grid>
+	</Grid>
+</UserControl>

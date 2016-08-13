@@ -1,0 +1,48 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+    xmlns:labels="clr-namespace:BucklingSprings.Aware.Controls.Labels;assembly=BucklingSprings.Aware.Controls"
+    mc:Ignorable="d"
+    d:DesignWidth="1200"
+    Background="#818181"
+    Foreground="#ededed"
+    Visibility="{Binding Visibility}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="AUTO" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="18" >
+                    <Run FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black" Text="{Binding Message, FallbackValue=Message, Mode=OneWay}"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Viewbox>
+        
+
+        <Button Grid.Row="1"  Grid.Column="2" Command="{Binding Dismiss}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter Content="{TemplateBinding Content}"/>
+                </ControlTemplate>
+            </Button.Template>
+            <Border BorderBrush="#ededed" BorderThickness="2" Padding="20,2,20,2" Margin="20,0,0,0" VerticalAlignment="Center" >
+                <TextBlock FontSize="16" Foreground="#ededed" FontWeight="Black">OK</TextBlock>
+            </Border>
+        </Button>
+
+    </Grid>
+</UserControl>

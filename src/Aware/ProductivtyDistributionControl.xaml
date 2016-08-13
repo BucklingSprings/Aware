@@ -1,0 +1,87 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:BucklingSprings.Aware.Controls.Charts;assembly=BucklingSprings.Aware.Controls"
+    xmlns:composite="clr-namespace:BucklingSprings.Aware.Controls.Composite;assembly=BucklingSprings.Aware"
+    xmlns:tiles="clr-namespace:BucklingSprings.Aware.Tiles;assembly=BucklingSprings.Aware"
+    mc:Ignorable="d">
+    <Grid ShowGridLines="False" d:DataContext="{d:DesignInstance Type=composite:DesignTimeProductivtyDistributionControlViewModel, IsDesignTimeCreatable=True}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <controls:BoxPlotControl 
+            x:Name="MinuteDistributionBoxPlot"  
+            BoxPlotDataProvider="{Binding ProductivtyDistributionControlProviders.MinutesWorkedDistributionDataProvider}"
+            ShowXAxisLabels="false"/>
+    
+        <controls:BoxPlotControl 
+            x:Name="WordDistributionBoxPlot" 
+            Grid.Row="1" 
+            BoxPlotDataProvider="{Binding ProductivtyDistributionControlProviders.WordCountDistributionDataProvider}"
+            ShowXAxisLabels="false"/>
+    
+        <controls:BoxPlotControl 
+            x:Name="WordsPerMinuteDistributionBoxPlot" 
+            Grid.Row="2" 
+            BoxPlotDataProvider="{Binding ProductivtyDistributionControlProviders.WordsPerMinuteDistributionDataProvider}"
+            VerticalAlignment="Top"/>
+        
+        <ItemsControl Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Details}" x:Name="MinuteDetails">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="22,0,0,0">
+                        <tiles:TilesHoursMinutes Margin="0,0,0,5" Minutes="{Binding Minutes}" />
+                        <tiles:TilesHourMinuteRangeSlim MinutesLow="{Binding MinutesLow}" MinutesHigh="{Binding MinutesHigh}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Details}" x:Name="WordDetails">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="22,0,0,0">
+                        <tiles:TilesWords Margin="0,0,0,5" Words="{Binding Words}"/>
+                        <tiles:TilesWordRangeSlim  WordsLow="{Binding WordsLow}" WordsHigh="{Binding WordsHigh}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <ItemsControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Details}" x:Name="WordPerMinuteDetails">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="22,0,0,0">
+                        <tiles:TilesWordsPerMinute Margin="0,0,0,5" WordsPerMinute="{Binding WordsPerMinute}"/>
+                        <tiles:TilesWordsPerMinuteRangeSlim Margin="0,0,0,5" WordsPerMinutesLow="{Binding WordsPerMinuteLow}" WordsPerMinutesHigh="{Binding WordsPerMinuteHigh}"/>
+                        <tiles:TilesLegend LegendText="{Binding ClassName}" LegendBrush="{Binding ClassColor}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

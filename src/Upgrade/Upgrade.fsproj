@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>2c82a8fe-deee-4cdb-ab90-f81909f1239d</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Upgrade</RootNamespace>
+    <AssemblyName>BucklingSprings.Aware.Upgrade</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Name>Upgrade</Name>
+    <Win32Resource>ICON.res</Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <Tailcalls>false</Tailcalls>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>5</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <StartArguments>--target Both --nolaunch</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.fs">
+      <Link>AssemblyInfo.fs</Link>
+    </Compile>
+    <Compile Include="LaunchTypes.fs" />
+    <Compile Include="WelcomeWindow.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="app.config" />
+    <Resource Include="WelcomeWindow.xaml" />
+    <Resource Include="Upgrade.ico" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="UnionArgParser">
+      <HintPath>..\packages\UnionArgParser.0.8.6\lib\net40\UnionArgParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <ProjectReference Include="..\Common\Common.fsproj">
+      <Name>Common</Name>
+      <Project>{124a1e80-da25-4d25-bf99-27ae385af728}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.fsproj">
+      <Name>Core</Name>
+      <Project>{ed34df08-89c0-407b-a716-b42e45b12b6d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Name>Entities</Name>
+      <Project>{07cd111f-a557-4eab-9b5a-0138c29f133d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Store\Store.fsproj">
+      <Name>Store</Name>
+      <Project>{e3002a3b-d82c-4ea7-b32c-c2fb7596e5bb}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="AfterBuild">
+    <PropertyGroup>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x86\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='x86' ">$(WindowsSDK80Path)bin\x86\signtool.exe</SignToolPath>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x64\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='AMD64' ">$(WindowsSDK80Path)bin\x64\signtool.exe</SignToolPath>
+    </PropertyGroup>
+    <Exec Command="&quot;$(SignToolPath)&quot; sign /n Buckling /v &quot;$(MSBuildProjectDirectory)\$(OutputPath)$(AssemblyName).exe&quot;" Condition="'$(SignBits)' == 'True'" />
+  </Target>
+</Project>

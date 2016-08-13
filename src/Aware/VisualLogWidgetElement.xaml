@@ -1,0 +1,127 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:BucklingSprings.Aware.Controls.Charts;assembly=BucklingSprings.Aware.Controls"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+    xmlns:widgets="clr-namespace:BucklingSprings.Aware.Widgets;assembly=BucklingSprings.Aware"
+    mc:Ignorable="d"
+    d:DesignHeight="768"
+    d:DesignWidth="1024"
+    Focusable="True">
+    <Grid >
+        <Grid.Resources>
+            <data:WordCountHumanizer x:Key="WordCountHumanizer" />
+            <data:DateTimeOffsetToTimeHumanizer x:Key="DateTimeOffsetToTimeHumanizer" />
+            <Style x:Key="Tile" TargetType="Border">
+                <Setter Property="Background" Value="#FFEDEDED" />
+                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="BorderThickness" Value="0,0,5,5" />
+            </Style>
+            <Style x:Key="Numerals" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="./#Blanch Condensed" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="#FF818181" />
+                <Setter Property="FontSize" Value="52" />
+                <Setter Property="Margin" Value="0,-9,0,-4" />
+            </Style>
+            <Style TargetType="Glyphs" x:Key="TextLabels">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontRenderingEmSize" Value="10"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Fill" Value="#FF818181"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="ClassText">
+                <Setter Property="FontFamily" Value="/BucklingSprings.Aware.Common;Component/#Lato Black"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="MaxWidth" Value="150"/>
+                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <controls:TimeMapControl x:Name="OverviewTimeMap" TimeMapDataProvider="{Binding TimeMapDataProvider}" Grid.RowSpan="2" Margin="0,0,20,0">
+
+        </controls:TimeMapControl>
+
+        <Grid Grid.Column="1" d:DataContext="{d:DesignInstance Type=widgets:DesignTimeBlockOfTimeViewModel, IsDesignTimeCreatable=True}" DataContext="{Binding BlockDetails}" Margin="0,3,0,-3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Border Width="95" Height="95" BorderThickness="0,0,5,5" Style="{StaticResource Tile}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Hours, FallbackValue=--}" Style="{StaticResource Numerals}"/>
+                    <Glyphs UnicodeString="HOURS" Indices=",110;,110;,110;,110;" Style="{StaticResource TextLabels}" FontUri="Lato-Bla.ttf"/>
+                </StackPanel>
+            </Border>
+
+            <Border Width="90" Height="95" BorderThickness="0,0,0,5" Style="{StaticResource Tile}" Grid.Column="1">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Minutes, FallbackValue=--}" Style="{StaticResource Numerals}"/>
+                    <Glyphs UnicodeString="MINUTES" Indices=",120;,80;,110;,110;,110;,110;" Style="{StaticResource TextLabels}" FontUri="Lato-Bla.ttf"/>
+                </StackPanel>
+            </Border>
+
+            <Border Width="185" Height="50" BorderThickness="0,0,0,5" Style="{StaticResource Tile}" Grid.ColumnSpan="2" Grid.Row="1">
+                <TextBlock 
+                    Text="{Binding ClassName, FallbackValue=--}" 
+                    Style="{StaticResource ClassText}" 
+                    Foreground="{Binding ClassColor, FallbackValue=#FF3AADD9}"
+                    FontWeight="Bold"
+                    Margin="0,2,0,0"/>
+            </Border>
+
+            <Border Width="185" Height="10" BorderThickness="0,0,0,5" Grid.ColumnSpan="2" Grid.Row="2" Background="{Binding ClassColor, FallbackValue=#FF3AADD9}">
+
+            </Border>
+
+            <Border Width="185" Height="90" BorderThickness="0,0,0,0" Style="{StaticResource Tile}" Grid.Row="3" Grid.ColumnSpan="2">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Words, FallbackValue=--, Converter={StaticResource WordCountHumanizer}}" Style="{StaticResource Numerals}"/>
+                    <Glyphs UnicodeString="WORDS" Indices=",135;,110;,110;,125" Style="{StaticResource TextLabels}" FontUri="Lato-Bla.ttf"/>
+                </StackPanel>
+            </Border>
+
+            <Border Width="180" Height="90" BorderThickness="0,0,0,0" Style="{StaticResource Tile}" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,55,0,0">
+                <TextBlock 
+                        Style="{StaticResource ClassText}" 
+                        Foreground="#FF818181"
+                        Margin="0,2,0,0">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1}">
+                            <Binding Path="StartTime" Converter="{StaticResource DateTimeOffsetToTimeHumanizer}" />
+                            <Binding Path="EndTime" Converter="{StaticResource DateTimeOffsetToTimeHumanizer}"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Border>
+
+
+        </Grid>
+
+
+
+
+
+    </Grid>
+</UserControl>

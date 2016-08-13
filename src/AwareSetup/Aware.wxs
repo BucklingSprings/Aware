@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+	<?include ..\Version.wxi ?>
+
+	<Product Id="*" Name="Buckling Springs Aware $(var.AwareVersion)" Language="1033" Version="$(var.AwareVersion)" Manufacturer="Buckling Springs LLC" UpgradeCode="5dba2a23-bf88-484b-8a63-704a7675a1e0">
+
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Id="*" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Icon Id="Aware.ico" SourceFile="Aware.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="Aware.ico" />
+		<Property Id='ARPCOMMENTS'>Aware $(var.AwareVersion)</Property>
+		<Property Id='ARPCONTACT'>support@bucklingsprings.com</Property>
+		<Property Id='ARPHELPLINK'>http://www.Aware.am</Property>
+		<Property Id='ARPURLINFOABOUT'>http://www.Aware.am</Property>
+		<Property Id='ARPURLUPDATEINFO'>http://www.Aware.am</Property>
+		<Property Id='ARPHELPTELEPHONE'>(650) 308-4717</Property>
+
+		<Feature Id="ProductFeature" Title="Aware" Level="1">
+			<ComponentGroupRef Id="AwareFiles" />
+			<ComponentGroupRef Id="AwareShortcuts" />
+		</Feature>
+
+		<util:CloseApplication Id="CloseAware" Target="$(var.Aware.TargetFileName)" TerminateProcess="1"  RebootPrompt="no"  EndSessionMessage="yes" CloseMessage="yes" />
+		<util:CloseApplication Id="CloseCollector" Target="$(var.Collector.TargetFileName)" TerminateProcess="1" RebootPrompt="no" EndSessionMessage="yes" CloseMessage="yes"/>
+		
+		<CustomAction Id="LaunchUpgrade" Execute="commit" FileKey="UpgradeExe" ExeCommand="--target Both"  Return="ignore" Impersonate="yes"/>
+
+		<InstallExecuteSequence>
+			<Custom Action="LaunchUpgrade" After="InstallInitialize" />
+		</InstallExecuteSequence>
+
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id='BucklingSprings' Name='Buckling Springs'>
+					<Directory Id="INSTALLFOLDER" Name="Aware" />
+				</Directory>
+			</Directory>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="AwareStartMenu" Name="Aware"/>
+			</Directory>
+			<Directory Id="StartupFolder" Name="StartUp" />
+		</Directory>
+		
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="AwareFiles" Directory="INSTALLFOLDER">
+
+			<Component Id="AwareExecutable" Guid="*">
+				<File Name="$(var.Aware.TargetFileName)" Source="$(var.Aware.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="DeepExecutable" Guid="*">
+				<File Name="$(var.deep.TargetFileName)" Source="$(var.deep.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="CollectorExecutable" Guid="*">
+				<File Name="$(var.Collector.TargetFileName)" Source="$(var.Collector.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="CommonAssembly" Guid="*">
+				<File Name="$(var.Common.TargetFileName)" Source="$(var.Common.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="ControlsAssembly" Guid="*">
+				<File Name="$(var.Controls.TargetFileName)" Source="$(var.Controls.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="CoreAssembly" Guid="*">
+				<File Name="$(var.Core.TargetFileName)" Source="$(var.Core.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+
+			<Component Id="EntitiesAssembly" Guid="*">
+				<File Name="$(var.Entities.TargetFileName)" Source="$(var.Entities.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="ExporterExecutable" Guid="*">
+				<File Name="$(var.Exporter.TargetFileName)" Source="$(var.Exporter.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="CheckExecutable" Guid="*">
+				<File Name="$(var.Check.TargetFileName)" Source="$(var.Check.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="SampleWatchExecutable" Guid="*">
+				<File Name="$(var.SampleWatch.TargetFileName)" Source="$(var.SampleWatch.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="StoreAssembly" Guid="*">
+				<File Name="$(var.Store.TargetFileName)" Source="$(var.Store.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="UpgradeExecutable" Guid="*">
+				<File Id="UpgradeExe" Name="$(var.Upgrade.TargetFileName)" Source="$(var.Upgrade.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="MBroadcastExecutable" Guid="*">
+				<File Id="MBroadcastExe" Name="$(var.mbroadcast.TargetFileName)" Source="$(var.mbroadcast.TargetPath)"  KeyPath="yes"/>
+			</Component>
+
+			<!-- Dependencies -->
+
+			<Component Id="FSharpCoreAssembly" Guid="*">
+				<File Name="FSharp.Core.dll" Source="$(var.Aware.TargetDir)FSharp.Core.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="Log4NetAssembly" Guid="*">
+				<File Name="log4net.dll" Source="$(var.Aware.TargetDir)log4net.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="EntitiesFrameworkAssembly" Guid="*">
+				<File Name="EntityFramework.dll" Source="$(var.Entities.TargetDir)EntityFramework.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="EntityFrameworkSqlServerAssembly" Guid="*">
+				<File Name="EntityFramework.SqlServer.dll" Source="$(var.Entities.TargetDir)EntityFramework.SqlServer.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="UnionArgParserAssembly" Guid="*">
+				<File Name="UnionArgParser.dll" Source="$(var.Exporter.TargetDir)UnionArgParser.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="NewtonsoftJsonAssembly" Guid="*">
+				<File Name="Newtonsoft.Json.dll" Source="$(var.Aware.TargetDir)Newtonsoft.Json.dll"  KeyPath="yes"/>
+			</Component>
+
+			<Component Id="LaplaceAssembly" Guid="*">
+				<File Name="laplace.dll" Source="$(var.Aware.TargetDir)laplace.dll"  KeyPath="yes"/>
+			</Component>
+
+
+		</ComponentGroup>
+
+		<ComponentGroup Id="AwareShortcuts" Directory="AwareStartMenu">
+
+			<!-- Shortcut -->
+			<Component Id="AwareShortcutComponent" Guid="*">
+				<Shortcut Id="AwareShortcut" Name="Aware" Description="Aware" Icon="Aware.ico" Target="[INSTALLFOLDER]$(var.Aware.TargetFileName)" WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="CollectorShortcut" Name="Collector" Directory="StartupFolder" Description="Collector" Icon="Aware.ico" Target="[INSTALLFOLDER]$(var.Collector.TargetFileName)" WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="AwareStartupShortcut" Name="Aware" Directory="StartupFolder" Description="Aware" Icon="Aware.ico" Target="[INSTALLFOLDER]$(var.Aware.TargetFileName)" WorkingDirectory="INSTALLFOLDER"/>
+				<RemoveFolder Id="AwareStartMenu" On="uninstall"/>
+				<RegistryValue Root="HKCU" Key="Software\BucklingSprings\Aware" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			</Component>
+
+		</ComponentGroup>
+
+		
+	</Fragment>
+
+</Wix>

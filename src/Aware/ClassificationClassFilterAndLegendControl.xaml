@@ -1,0 +1,108 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common">
+    <Grid Background="#ededed" ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31" />
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="36" />
+        </Grid.ColumnDefinitions>
+        <ItemsControl ItemsSource="{Binding Classifiers}" Grid.Column="1" MaxWidth="190">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <data:StringToUpperCaseConverter x:Key="StringToUpperCaseConverter" />
+                        </StackPanel.Resources>
+                        <Border Height="75">
+                            <Button Command="{Binding SwitchToClassifier}">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Border Height="75">
+                                            <TextBlock VerticalAlignment="Bottom" Margin="0,0,0,20">
+                                                <Run x:Name="Run" 
+                                                    Text="{Binding Description, Mode=OneWay, Converter={StaticResource StringToUpperCaseConverter}}" 
+                                                    FontSize="24" Foreground="#818181" FontWeight="Black"
+                                                    FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black"></Run>
+                                            </TextBlock>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter TargetName="Run" Property="Foreground" Value="#FF3AADD9" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                                
+                            </Button>
+                        </Border>
+
+                        <ListBox SelectionMode="Multiple" ItemsSource="{Binding ClassificationClasses}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="IsSelected" Value="{Binding Mode=TwoWay, Path=IsSelected}"/>
+                                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Grid ShowGridLines="False">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Width="20" Height="20" Margin="5,0,5,10" Background="{Binding Background}" Grid.Column="0">
+                                                        <Image Height="16" Width="16" x:Name="Check">
+                                                            <Image.Source>
+                                                                <BitmapImage UriSource="pack://application:,,,/check.png" />
+                                                            </Image.Source>
+                                                        </Image>
+                                                    </Border>
+                                                    <Border Grid.Column="1" Background="{Binding Background}" x:Name="TextBackground" Height="20" Width="160" Margin="0,0,0,10">
+                                                        <TextBlock x:Name="DescriptionText"
+                                                            Text="{Binding Description}" 
+                                                            Foreground="White" FontWeight="Bold"
+                                                            MaxWidth="150"
+                                                            TextTrimming="CharacterEllipsis"
+                                                            VerticalAlignment="Center"
+                                                            FontSize="13"
+                                                            FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black">
+                                                        </TextBlock>
+                                                    </Border>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Check" Property="Visibility"  Value="Visible" />
+                                                        <Setter TargetName="TextBackground" Property="Background"  Value="{Binding Background}" />
+                                                        <Setter TargetName="DescriptionText" Property="Foreground"  Value="White" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="False">
+                                                        <Setter TargetName="Check" Property="Visibility"  Value="Hidden" />
+                                                        <Setter TargetName="TextBackground" Property="Background"  Value="Transparent" />
+                                                        <Setter TargetName="DescriptionText" Property="Foreground"  Value="#818181" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.Template>
+                                <ControlTemplate>
+                                    <Border Name="Border">
+                                        <ScrollViewer Focusable="false">
+                                            <StackPanel IsItemsHost="True" />
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ListBox.Template>
+                        </ListBox>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+
+</UserControl>

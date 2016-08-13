@@ -1,0 +1,9 @@
+﻿In Developer Command Prompt
+
+cd c:\bucklingsprings\aware\src
+msbuild Build.proj /p:SignBits=true
+
+Upload installers\*.msi and *.exe to Amazon
+==================
+Upload Change Log to www.aware.am
+Make version information changes to app harbour.

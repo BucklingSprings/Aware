@@ -1,0 +1,83 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="552" Height="375" Background="#3aadd9" Foreground="White">
+    <Grid ShowGridLines="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="6" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            FontSize="60" 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" Margin="0,-18,0,0" 
+            FontWeight="Bold">
+                <Run 
+                    Typography.CapitalSpacing="True" 
+                    FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black">AWARE</Run>
+                <Run 
+                    Typography.Capitals="AllSmallCaps" 
+                    FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black" FontSize="10" BaselineAlignment="Superscript"></Run>
+        </TextBlock>
+
+        <TextBlock 
+            FontSize="14" 
+            Grid.Row="2"
+            Grid.Column="1" 
+            VerticalAlignment="Top" 
+            Margin="0,-3,0,0" 
+            FontWeight="Regular">
+            <Run 
+                FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black" x:Name="StatusRun"></Run>
+            <Run 
+                FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Regular" FontSize="10" x:Name="VersionRun"/>
+        </TextBlock>
+
+        <TextBlock 
+            FontSize="12" 
+            Grid.Row="4"
+            Grid.Column="1" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,0"
+            Padding="2"
+            FontWeight="Regular">
+            <Run 
+                Typography.CapitalSpacing="True" 
+                FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black">BUCKLING SPRINGS LLC</Run>
+        </TextBlock>
+
+        <TextBlock 
+            FontSize="10" 
+            Grid.Row="5"
+            Grid.Column="1" 
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0,0,0,0" 
+            Padding="2"
+            FontWeight="Regular">
+            <Run 
+                FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Regular" Text="COPYRIGHT © 2015"/>
+        </TextBlock>
+
+        <Border Grid.Column="1" Grid.Row="7" Background="#bfcb43" Height="6" Width="92" HorizontalAlignment="Right">
+
+        </Border>
+
+    </Grid>
+</UserControl>

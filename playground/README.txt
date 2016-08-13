@@ -1,0 +1,1 @@
+The playground folder has temporary and scratch projects

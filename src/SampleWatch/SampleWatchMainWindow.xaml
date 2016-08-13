@@ -1,0 +1,69 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:sampleWatch="clr-namespace:BucklingSprings.Aware.SampleWatch;assembly=SampleWatch"
+    FontSize="12"
+    MinWidth="500">
+    <Grid d:DataContext="{d:DesignInstance Type=sampleWatch:DesignTimeSampleWatchMainWindowViewModel, IsDesignTimeCreatable=True}">
+        <ListBox ItemsSource="{Binding LastFewSamples}" AlternationCount="2">
+            <ListBox.ItemContainerStyle>
+                <Style>
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Control.Background" Value="LightGray"></Setter>
+                            <Setter Property="Control.Foreground" Value="Black"></Setter>
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Control.Background" Value="White"></Setter>
+                            <Setter Property="Control.Foreground" Value="Black"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" x:Key="LabelBlock">
+                                <Setter Property="Margin" Value="0,0,10,0"/>
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Program:" Grid.Row="0" Grid.Column="0" Style="{StaticResource LabelBlock}"/>
+                        <TextBlock Text="{Binding Program}" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Text="Title:" Grid.Row="1" Grid.Column="0" Style="{StaticResource LabelBlock}"/>
+                        <TextBlock Text="{Binding Title}" Grid.Row="1" Grid.Column="1"/>
+
+                        <TextBlock Text="Words:" Grid.Row="2" Grid.Column="0" Style="{StaticResource LabelBlock}"/>
+                        <TextBlock Text="{Binding Words}" Grid.Row="2" Grid.Column="1" />
+
+                        <TextBlock Text="Minutes:" Grid.Row="3" Grid.Column="0" Style="{StaticResource LabelBlock}"/>
+                        <TextBlock Text="{Binding Minutes, StringFormat={}{0:0.0}}" Grid.Row="3" Grid.Column="1"/>
+
+                        <TextBlock Text="From To:" Grid.Row="4" Grid.Column="0" Style="{StaticResource LabelBlock}"/>
+                        <TextBlock Text="{Binding FromTo}" Grid.Row="4" Grid.Column="1"/>
+                    </Grid>
+                    
+                        
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

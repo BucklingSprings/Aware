@@ -1,0 +1,43 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+    xmlns:labels="clr-namespace:BucklingSprings.Aware.Controls.Labels;assembly=BucklingSprings.Aware.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="23" d:DesignWidth="78">
+
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Glyphs">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontRenderingEmSize" Value="9"/>
+                <Setter Property="Margin" Value="0,1,0,0"/>
+                <Setter Property="Fill" Value="#FFFFFFFF"/>
+            </Style>
+            <data:StringToUpperCaseConverter x:Key="StringToUpperCaseConverter" />
+        </Grid.Resources>
+
+        <Border Background="#FF3AADD9">
+            <Glyphs
+                labels:GlyphsExpandedText.GlyphsExpandedText="{Binding Text,FallbackValue=SEPT 4, Converter={StaticResource StringToUpperCaseConverter}}"
+                FontUri="Lato-Bla.ttf" />
+        </Border>
+
+        <Polygon Grid.Row="1"
+            HorizontalAlignment="Center"
+            Points="0 0, 3 3, 6 0">
+            <Polygon.Fill>
+                <SolidColorBrush Color="#FF3AADD9"/>
+            </Polygon.Fill>
+        </Polygon>
+    </Grid>
+
+</UserControl>
+

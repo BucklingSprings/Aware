@@ -1,0 +1,57 @@
+﻿ Feature Pipeline
+
+    Compare - Side by  Side - M
+    Train more - S
+    Date Filters - M??
+        Selected Days
+            Weekends
+            Weekdays
+    Habits\Prediction - L 
+        
+
+
+	Cortana Integration.
+    Detach\Tear -  on top - M
+    Export From Widget - M
+    Goals - L
+    Beeminder Integration - M
+    Streaks?? 
+    
+    In memory matrix based data structure. - L
+        One cell per minute - 1440 cells per day
+            10 years = 20 meg
+        Cell - Word Count - 8 Bit, Class -- 8 bits, Program 8 bit, + 8 bits to spare.
+
+
+    Nested classes\Program Groups - L
+    
+    Display Image while training - M
+
+Content
+    7 Seven habits of people that use Aware.
+        No morning email
+        Morning Routine.
+        Celebrate - 
+    Where did the day go?
+    Predicting - Habits
+        Modelling Workhabits
+
+    Streak analysis
+    Integrating with tableau
+        
+
+
+Deep Inspection -
+    Read actual sample data.
+    Config GUI
+    Automatic disk clean up
+
+Add train more support - 4 hours.
+
+
+-- Bugs
+Midnight boundary issues.
+Extra day in time line.
+
+-- Content - 
+

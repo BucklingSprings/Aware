@@ -1,0 +1,44 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+    xmlns:labels="clr-namespace:BucklingSprings.Aware.Controls.Labels;assembly=BucklingSprings.Aware.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="120" d:DesignWidth="120">
+    
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="#FF818181" />
+            </Style>
+            <Style TargetType="Glyphs">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontRenderingEmSize" Value="10"/>
+                <Setter Property="Fill" Value="#FF818181"/>
+            </Style>
+            <data:StringToUpperCaseConverter x:Key="StringToUpperCaseConverter" />
+    </Grid.Resources>
+        <Glyphs
+            labels:GlyphsExpandedText.GlyphsExpandedText="{Binding Month,FallbackValue=SEPT., Converter={StaticResource StringToUpperCaseConverter}}"
+            VerticalAlignment="Bottom" Grid.Row="0" 
+            FontUri="Lato-Bla.ttf" />
+        <TextBlock 
+            Text="{Binding Day, FallbackValue=12}" 
+            VerticalAlignment="Center" Grid.Row="1" FontSize="50" FontFamily="./#Blanch Condensed"
+            Margin="0,-5,0,-5"/>
+        <Glyphs
+            labels:GlyphsExpandedText.GlyphsExpandedText="{Binding Year,FallbackValue=1984., Converter={StaticResource StringToUpperCaseConverter}}"
+            VerticalAlignment="Top" 
+            Grid.Row="2"
+            FontUri="Lato-Bla.ttf" />
+    </Grid>
+    
+</UserControl>

@@ -1,0 +1,26 @@
+﻿Overview
+	Timer
+	Daily Log
+	Visual Log
+	Usage Daily
+	Usage Totals
+	* Goals
+
+Trends
+	Productivity Trends
+	Typical Usage
+	Start & End Time Trends
+	Typical Start and End Time
+
+Insights
+	Day of Week
+	Hour Of Day
+	Hour Of Work
+	Trellis - Words
+	Trellis - Words/Minutes
+	Trellis - Minutes
+
+
+
+Settings
+	* Configure Categories

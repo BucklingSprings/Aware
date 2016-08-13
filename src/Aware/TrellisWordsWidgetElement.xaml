@@ -1,0 +1,47 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:BucklingSprings.Aware.Controls.Charts;assembly=BucklingSprings.Aware.Controls"
+    xmlns:widgets="clr-namespace:BucklingSprings.Aware.Widgets;assembly=BucklingSprings.Aware"
+    xmlns:tiles="clr-namespace:BucklingSprings.Aware.Tiles;assembly=BucklingSprings.Aware"
+    mc:Ignorable="d">
+    <Grid d:DataContext="{d:DesignInstance Type=widgets:DesignTimeTrellisWordsViewModel, IsDesignTimeCreatable=True}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <controls:DayHourMatrixControl x:Name="DayHourMatrixControl" DayHourMatrixProvider="{Binding DayHourMatrixProvider}" />
+        
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding ClassDetails}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="22,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <tiles:TilesWords Words="{Binding CellDetails.Words}" Margin="0,0,0,5"/>
+                        <tiles:TilesLegend LegendText="{Binding ClassName}" LegendBrush="{Binding ClassColor}" Margin="0,0,0,5" Grid.Row="1" />
+                        <tiles:TilesWordRange WordsHigh="{Binding CellDetails.WordsHigh}" WordsLow="{Binding CellDetails.WordsLow}" Grid.Row="2" />
+
+                        <tiles:TilesDayHour Day="{Binding CellDetails.DayOfWeek}"  Hour="{Binding CellDetails.HourOfDay}" Grid.Row="3" VerticalAlignment="Top" Margin="0,52,0,0"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.6</ProductVersion>
+    <ProjectGuid>2d35a382-e73f-4f10-bdd0-aed372a6230a</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>Aware</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <SignOutput>true</SignOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;</DefineConstants>
+    <WixVariables>
+    </WixVariables>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WixVariables>
+    </WixVariables>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Aware.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aware\Aware.fsproj">
+      <Name>Aware</Name>
+      <Project>{c0d42ad8-bb8a-4cfb-b1de-05a3d3c7e08b}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Check\Check.fsproj">
+      <Name>Check</Name>
+      <Project>{74b4df9d-7c09-4005-9305-1a226c764463}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Collector\Collector.fsproj">
+      <Name>Collector</Name>
+      <Project>{cddddfbe-2ffe-46bb-af87-41b1873caac3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.fsproj">
+      <Name>Common</Name>
+      <Project>{124a1e80-da25-4d25-bf99-27ae385af728}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.fsproj">
+      <Name>Controls</Name>
+      <Project>{76b2b0f9-8c16-4f29-a342-16c39fd62ef8}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.fsproj">
+      <Name>Core</Name>
+      <Project>{ed34df08-89c0-407b-a716-b42e45b12b6d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\deep\deep.fsproj">
+      <Name>deep</Name>
+      <Project>{a80e5f31-509b-4c53-aff7-e1ee4daedab3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.vbproj">
+      <Name>Entities</Name>
+      <Project>{07cd111f-a557-4eab-9b5a-0138c29f133d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Exporter\Exporter.fsproj">
+      <Name>Exporter</Name>
+      <Project>{c8e9a26e-ef12-4a61-91e7-e92c8bf2c9c6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\mbroadcast\mbroadcast.fsproj">
+      <Name>mbroadcast</Name>
+      <Project>{3614a308-9c7a-45d7-ad5a-1ecc21f6dab8}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleWatch\SampleWatch.fsproj">
+      <Name>SampleWatch</Name>
+      <Project>{86e14bbd-b2b8-4a9d-8e24-d177bc130d61}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Store\Store.fsproj">
+      <Name>Store</Name>
+      <Project>{e3002a3b-d82c-4ea7-b32c-c2fb7596e5bb}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\Upgrade\Upgrade.fsproj">
+      <Name>Upgrade</Name>
+      <Project>{2c82a8fe-deee-4cdb-ab90-f81909f1239d}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Aware.ico" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <Target Name="SignMsi">
+    <PropertyGroup>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x86\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='x86' ">$(WindowsSDK80Path)bin\x86\signtool.exe</SignToolPath>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x64\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='AMD64' ">$(WindowsSDK80Path)bin\x64\signtool.exe</SignToolPath>
+    </PropertyGroup>
+    <Exec Command="&quot;$(SignToolPath)&quot; sign /n Buckling  /v /d &quot;%(SignMsi.Filename)&quot; &quot;@(SignMsi)&quot;" />
+  </Target>
+</Project>

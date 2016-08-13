@@ -1,0 +1,34 @@
+﻿
+
+
+
+Code:	
+	Fix bug with hibernate.
+	Bug with collector stopping
+	Integrate Help launching	
+	Fix start and end time calc error pk found.
+
+
+	
+	
+================
+LLC
+Domain
+================
+
+================
+	Trademark?
+
+	When licensing
+		Host licensing service on Amazon
+		Store on shopify - Downloads on S3
+		Serial numbers using downtown HQ.
+			Change Scroll bar to flat look.
+
+			Release and Debug installs. Include PDB's in debug install.
+				Add registry setting for debugging.
+================
+	Busness Cards
+	
+		- BBS Main Page
+		Hosted on GitGub\Bitbucket

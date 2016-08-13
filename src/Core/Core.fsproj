@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ed34df08-89c0-407b-a716-b42e45b12b6d}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>BucklingSprings.Aware.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Name>Core</Name>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <Tailcalls>false</Tailcalls>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>5</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <StartArguments>--exporttype Words</StartArguments>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')" />
+  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition="(!Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')) And (Exists('$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets'))" />
+  <Import Project="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" Condition="(!Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')) And (!Exists('$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets')) And (Exists('$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets'))" />
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.fs">
+      <Link>AssemblyInfo.fs</Link>
+    </Compile>
+    <Compile Include="PrimitiveConstants.fs" />
+    <Compile Include="Win32.fs" />
+    <Compile Include="DiskSpace.fs" />
+    <Compile Include="Environment.fs" />
+    <Compile Include="Diagnostics.fs" />
+    <Compile Include="Housekeeping.fs" />
+    <Compile Include="Updates.fs" />
+    <Compile Include="CommonExtensions.fs" />
+    <Compile Include="Dates.fs" />
+    <Compile Include="Statistics.fs" />
+    <Compile Include="FilterCombinators.fs" />
+    <Compile Include="WordBasedSimilarity.fs" />
+    <Compile Include="CommandLineArguments.fs" />
+    <Compile Include="SystemConfiguration.fs" />
+    <Compile Include="NoiseReduction.fs" />
+    <Compile Include="Dated.fs" />
+    <Compile Include="Models.fs" />
+    <Compile Include="KeywordSettingsEditCommands.fs" />
+    <Compile Include="Measurement.fs" />
+    <Compile Include="Experiments.fs" />
+    <Compile Include="Goals.fs" />
+    <Compile Include="Phrase.fs" />
+    <Compile Include="Classifiers.fs" />
+    <Compile Include="SampleCombiner.fs" />
+    <Compile Include="DayStartAndEndTimes.fs" />
+    <Compile Include="Summaries.fs" />
+    <Compile Include="HourOfWorkCalculator.fs" />
+    <Compile Include="ActivitySamples.fs" />
+    <Compile Include="StoredSummaries.fs" />
+    <Compile Include="LazyTypedStoredSummariesReader.fs" />
+    <Compile Include="Humanize.fs" />
+    <Compile Include="TimeSeriesPhantom.fsi" />
+    <Compile Include="TimeSeriesPhantom.fs" />
+    <Compile Include="DeepInspection.fs" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FSharp.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="laplace">
+      <HintPath>..\lib\laplace.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <Target Name="AfterBuild">
+    <PropertyGroup>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x86\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='x86' ">$(WindowsSDK80Path)bin\x86\signtool.exe</SignToolPath>
+      <SignToolPath Condition=" Exists('$(WindowsSDK80Path)bin\x64\signtool.exe') and '$(SignToolPath)'=='' and '$(PROCESSOR_ARCHITECTURE)'=='AMD64' ">$(WindowsSDK80Path)bin\x64\signtool.exe</SignToolPath>
+    </PropertyGroup>
+    <Exec Command="&quot;$(SignToolPath)&quot; sign /n Buckling  /v &quot;$(MSBuildProjectDirectory)\$(OutputPath)$(AssemblyName).dll&quot;" Condition="'$(SignBits)' == 'True'" />
+  </Target>
+</Project>

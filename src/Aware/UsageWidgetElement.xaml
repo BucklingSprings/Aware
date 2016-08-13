@@ -1,0 +1,56 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:charts="clr-namespace:BucklingSprings.Aware.Controls.Charts;assembly=BucklingSprings.Aware.Controls"
+    xmlns:widgets="clr-namespace:BucklingSprings.Aware.Widgets;assembly=BucklingSprings.Aware"
+    xmlns:tiles="clr-namespace:BucklingSprings.Aware.Tiles;assembly=BucklingSprings.Aware"
+    mc:Ignorable="d"
+    FontSize="10"
+    >
+    <Grid d:DataContext="{d:DesignInstance Type=widgets:DesignTimeUsageViewModel, IsDesignTimeCreatable=True}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <charts:CircleChartControl Margin="30,-8,70,30" CircleChartDataProvider="{Binding MinutesDataProvider}" Grid.Row="0" x:Name="MinutesCircleChart" />
+
+        <Image Height="76" Width="76" Margin="100,62,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image.Source>
+                <BitmapImage UriSource="pack://application:,,,/minutes.png" />
+            </Image.Source>
+        </Image>
+
+        <charts:CircleChartControl Margin="30,-8,70,0" CircleChartDataProvider="{Binding WordsDataProvider}" Grid.Row="2" x:Name="WordsCircleChart" />
+
+        <Image Height="76" Width="76" Margin="100,62,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image.Source>
+                <BitmapImage UriSource="pack://application:,,,/words.png" />
+            </Image.Source>
+        </Image>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <tiles:TilesHoursMinutes Margin="0,0,0,5" Minutes="{Binding UsageMinutesHoverData.Minutes}" />
+            <tiles:TilesLegend 
+                Grid.Row="1" 
+                LegendText="{Binding UsageMinutesHoverData.ClassName}" 
+                LegendBrush="{Binding UsageMinutesHoverData.ClassColor}" />
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <tiles:TilesWords Words="{Binding UsageWordsHoverData.Words}" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,150 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:settings="clr-namespace:BucklingSprings.Aware.Settings;assembly=BucklingSprings.Aware"
+	xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+	mc:Ignorable="d"
+	FontSize="24"
+	Background="#ededed"
+	Foreground="#818181"
+	d:DesignHeight="800"
+	d:DesignWidth="800">
+
+	<Grid  Margin="50,0,50,0" ShowGridLines="False">
+		<Grid.Resources>
+			<Style TargetType="Button" x:Key="Large">
+				<Setter Property="HorizontalAlignment" Value="Stretch" />
+				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Margin" Value="0,10" />
+				<Setter Property="FontSize" Value="13" />
+				<Setter Property="FontFamily" Value="/BucklingSprings.Aware.Common;Component/#Lato Black" />
+				<Setter Property="Foreground" Value="#3aadd9" />
+				<Setter Property="Cursor" Value="Hand" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Button">
+							<Border BorderBrush="#3aadd9" BorderThickness="2" Padding="10,5,15,5" x:Name="Border">
+								<ContentPresenter HorizontalAlignment="Center" Content="{TemplateBinding Content}"/>
+							</Border>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsEnabled" Value="false">
+									<Setter Property="BorderBrush" Value="#ADADAD" TargetName="Border"/>
+									<Setter Property="Foreground" Value="#ADADAD" />
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+
+			</Style>
+			<Style TargetType="TextBlock">
+				<Setter Property="Margin" Value="8,-8,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+			<Style TargetType="Label">
+				<Setter Property="Margin" Value="8,0,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+			<Style TargetType="TextBox">
+				<Setter Property="Margin" Value="8,0,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+			<Style TargetType="ComboBox">
+				<Setter Property="Margin" Value="8,0,10,20" />
+				<Setter Property="Foreground"  Value="#818181"/>
+			</Style>
+		</Grid.Resources>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Margin="31,26,0,20">
+			<Run x:Name="Run"
+			   Text="Experiments"
+			   FontSize="24" Foreground="#818181" FontWeight="Black"
+			   FontFamily="/BucklingSprings.Aware.Common;Component/#Lato Black"></Run>
+		</TextBlock>
+
+		<Grid Grid.Row="2" ShowGridLines="False" Visibility="{Binding NewExperimentVisibility}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Label>Name:</Label>
+			<TextBox Grid.Column="1" Text="{Binding NewExperiment.Name}" ></TextBox>
+
+			<Label Grid.Row="1">Duration in Days:</Label>
+			<TextBox Grid.Row="1" Grid.Column="1" TextAlignment="Right" Text="{Binding NewExperiment.Duration}"></TextBox>
+			
+			<Label Grid.Row="2">Behaviour:</Label>
+			<ComboBox Grid.Row="2" Grid.Column="1" Width="300" ItemsSource="{Binding NewExperiment.Behaviours}" DisplayMemberPath="Name" SelectedValuePath="Kind" SelectedValue="NewExperiment.Kind"></ComboBox>
+
+			<Button Grid.Row="3" Command="{Binding NewExperiment.StartNewCommand}" Style="{StaticResource Large}" Width="200" HorizontalAlignment="Left">
+				Start New
+			</Button>
+		</Grid>
+
+		<Grid Grid.Row="2" ShowGridLines="False" Visibility="{Binding CurrentExperimentVisibility}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Label>Experiment in progress:</Label>
+			<Label Grid.Column="1" Content="{Binding CurrentExperiment.Name}"></Label>
+
+			<Label Grid.Row="1">Started On:</Label>
+			<Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentExperiment.StartedOn}"></Label>
+
+			<Label Grid.Row="2">Ends On:</Label>
+			<Label Grid.Row="2" Grid.Column="1" Content="{Binding CurrentExperiment.EndsOn}"></Label>
+
+			<Label Grid.Row="3">Behaviour:</Label>
+			<Label Grid.Row="3" Grid.Column="1" Content="{Binding CurrentExperiment.Behaviour}"></Label>
+
+			<Label Grid.Row="4">Today's Outcome:</Label>
+			<Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentExperiment.TodaysOutcome}"></Label>
+
+
+			<Button Grid.Row="5" Command="{Binding CurrentExperiment.AbandonCommand}" Style="{StaticResource Large}" Width="200" HorizontalAlignment="Left">
+				Abandon Experiment
+			</Button>
+		</Grid>
+
+
+		<Button Grid.Row="3" Command="{Binding HelpCommand}" Style="{StaticResource Large}" Width="200" HorizontalAlignment="Left">
+			Help
+		</Button>
+
+
+
+
+	</Grid>
+</UserControl>

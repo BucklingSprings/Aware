@@ -1,0 +1,45 @@
+﻿<Project
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  DefaultTargets="All">
+
+	<PropertyGroup>
+		<ConfigurationToBuild>Debug</ConfigurationToBuild>
+	</PropertyGroup>
+
+	<UsingTask TaskName="HgVersionFile" AssemblyFile=".\TaskLib\Versioning\MSBuildVersioning.dll" />
+	<Target Name="Version">
+		<HgVersionFile TemplateFile="AssemblyInfoBase.fs" DestinationFile="AssemblyInfo.fs" />
+		<HgVersionFile TemplateFile="AssemblyInfoBase.vb" DestinationFile="AssemblyInfo.vb" />
+		<HgVersionFile TemplateFile="VersionBase.wxi" DestinationFile="Version.wxi" />
+	</Target>
+
+	<Target Name="Clean">
+		<MSBuild Projects="aware.sln" Properties="Configuration=$(ConfigurationToBuild)" Targets="Clean"/>
+		<RemoveDir Directories="Installers"  />
+	</Target>
+
+
+	<Target Name="Build">
+		<MSBuild Projects="aware.sln" Properties="Configuration=$(ConfigurationToBuild)" Targets="Build"/>
+
+		<GetAssemblyIdentity AssemblyFiles="Core\bin\$(ConfigurationToBuild)\BucklingSprings.Aware.Core.dll">
+			<Output TaskParameter="Assemblies" ItemName="coreAssemblyInformation"/>
+		</GetAssemblyIdentity>
+		<PropertyGroup>
+			<ApplicationVersion>%(coreAssemblyInformation.Version)</ApplicationVersion>
+		</PropertyGroup>
+		<Message Text ="$(ApplicationVersion)" />
+
+	</Target>
+
+	<Target Name="Package">
+		<CreateItem Include="AwareSetup\bin\$(ConfigurationToBuild)\*.msi;AwareBundle\bin\$(ConfigurationToBuild)\*.exe">
+			<Output TaskParameter="Include" ItemName="Installers"/>
+		</CreateItem>
+		<MakeDir Directories="Installers"/>
+		<Copy SourceFiles="@(Installers)" DestinationFiles="@(Installers -> 'Installers\%(Filename)_$(ApplicationVersion)%(Extension)')" />
+	</Target>
+
+	<Target Name="All" DependsOnTargets="Clean;Version;Build;Package"  />
+
+</Project>

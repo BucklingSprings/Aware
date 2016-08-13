@@ -1,0 +1,27 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontSize="20"
+    xmlns:widgets="clr-namespace:BucklingSprings.Aware.Widgets;assembly=BucklingSprings.Aware"
+    xmlns:controls="clr-namespace:BucklingSprings.Aware.Controls.Charts;assembly=BucklingSprings.Aware.Controls"
+    xmlns:tiles="clr-namespace:BucklingSprings.Aware.Tiles;assembly=BucklingSprings.Aware">
+
+    <Grid d:DataContext="{d:DesignInstance Type=widgets:DesignTimeStartEndTimeDistributionViewModel, IsDesignTimeCreatable=True}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <tiles:TilesTimeOfDayStart Time="{Binding StartTime}" Margin="0,0,5,5"/>
+        <tiles:TilesTimeOfDayEnd Grid.Column="1" Time="{Binding EndTime}" Margin="0,0,0,5"/>
+
+        <tiles:TilesTimeOfDayRangeRangeSlim Grid.Row="1" TimeLow="{Binding StartTimeLow}" TimeHigh="{Binding StartTimeHigh}" Margin="0,0,5,5"/>
+        <tiles:TilesTimeOfDayRangeRangeSlim Grid.Row="1" Grid.Column="1" TimeLow="{Binding EndTimeLow}" TimeHigh="{Binding EndTimeHigh}" Margin="0,0,0,5"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,44 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:data="clr-namespace:BucklingSprings.Aware.Data;assembly=BucklingSprings.Aware.Common"
+    mc:Ignorable="d"
+    d:DesignHeight="90"
+    d:DesignWidth="185">
+    <Grid x:Name="TileContainer">
+        <Grid.Resources>
+            <data:WordCountHumanizer x:Key="WordCountHumanizer" />
+            <Style x:Key="Tile" TargetType="Border">
+                <Setter Property="Background" Value="#FFEDEDED" />
+            </Style>
+            <Style x:Key="Numerals" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="./#Blanch Condensed" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="#FF818181" />
+                <Setter Property="FontSize" Value="52" />
+                <Setter Property="Margin" Value="0,-9,0,-4" />
+            </Style>
+            <Style TargetType="Glyphs" x:Key="TextLabels">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontRenderingEmSize" Value="10"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Fill" Value="#FF818181"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border Width="185" Height="90" Style="{StaticResource Tile}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="{Binding Words, FallbackValue=--, Converter={StaticResource WordCountHumanizer}}" Style="{StaticResource Numerals}"/>
+                <Glyphs UnicodeString="WORDS" Indices=",135;,110;,110;,125" Style="{StaticResource TextLabels}" FontUri="Lato-Bla.ttf"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

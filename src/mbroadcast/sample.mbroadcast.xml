@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AwareAddOn enabled="true" xmlns="http://bucklingsprings.com/aware/addon/mbroadcast">
+	<Program><![CDATA[ show_args.bat ]]> </Program>
+	<WorkingDirectory> <![CDATA[ c:\temp ]]> </WorkingDirectory>
+	<Arguments> <![CDATA[ {CurrentDateAndTime} ]]>  </Arguments>
+</AwareAddOn>
+
